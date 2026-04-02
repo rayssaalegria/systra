@@ -3,30 +3,21 @@
 import { useState } from 'react';
 import { DesignSystem } from '@/types';
 import DesignSystemDisplay from '@/components/DesignSystemDisplay';
-import HistoryPanel from '@/components/HistoryPanel';
 
 const SECTIONS = [
-  { id: 'typography', label: 'Typography' },
-  { id: 'colors', label: 'Colors' },
-  { id: 'spacing', label: 'Spacing' },
-  { id: 'border-radius', label: 'Border radius' },
-  { id: 'shadows', label: 'Shadows' },
+  { id: 'typography', label: 'Tipografia' },
+  { id: 'colors', label: 'Cores' },
+  { id: 'spacing', label: 'Espaçamento' },
+  { id: 'border-radius', label: 'Borda arredondada' },
+  { id: 'shadows', label: 'Sombras' },
 ];
 
-function SidebarIcon({ type }: { type: string }) {
-  const cls = 'w-4 h-4 shrink-0 text-[var(--sasi-primary)]';
-  if (type === 'search') return (
-    <svg className={cls} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+function IconSearch({ cls }: { cls?: string }) {
+  return (
+    <svg className={cls ?? 'w-4 h-4 shrink-0'} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="7" cy="7" r="4.5" /><path d="M10.5 10.5l2.5 2.5" />
     </svg>
   );
-  if (type === 'history') return (
-    <svg className={cls} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M2.5 8a5.5 5.5 0 1 0 5.5-5.5 5.72 5.72 0 0 0-3.9 1.6L2.5 5.5" /><path d="M2.5 2.5v3h3" /><path d="M8 5.5V8l2 1" />
-    </svg>
-  );
-  if (type === 'dot') return <span className="w-1.5 h-1.5 rounded-full bg-[var(--sasi-primary)] shrink-0" />;
-  return null;
 }
 
 export default function Home() {
@@ -34,7 +25,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<DesignSystem | null>(null);
   const [error, setError] = useState('');
-  const [historyOpen, setHistoryOpen] = useState(false);
 
   async function handleAnalyze(e: React.FormEvent) {
     e.preventDefault();
@@ -69,10 +59,10 @@ export default function Home() {
   return (
     <div className="flex h-screen overflow-hidden" style={{ background: 'var(--sasi-page)' }}>
 
-      {/* ── Sidebar ─────────────────────────────────── */}
+      {/* ── Sidebar ───────────────────────────────── */}
       <aside className="w-[220px] shrink-0 flex flex-col justify-between" style={{ background: 'var(--sasi-sidebar)' }}>
         <div className="flex flex-col">
-          {/* Brand — same height as header (76px) */}
+          {/* Brand */}
           <div className="flex items-center gap-2 px-4 h-[76px] shrink-0">
             <div className="w-6 h-6 rounded-lg flex items-center justify-center text-white text-[11px] font-bold shrink-0" style={{ background: 'var(--sasi-primary)' }}>
               S
@@ -83,23 +73,15 @@ export default function Home() {
           {/* Nav */}
           <nav className="flex flex-col">
             <button
-              className="flex items-center gap-2.5 px-4 h-14 text-sm font-medium text-left w-full transition-colors"
+              className="flex items-center gap-2.5 px-4 h-14 text-sm font-medium text-left w-full"
               style={{ color: 'var(--sasi-primary)' }}
             >
-              <SidebarIcon type="search" />
-              Analyzer
-            </button>
-            <button
-              onClick={() => setHistoryOpen(true)}
-              className="flex items-center gap-2.5 px-4 h-14 text-sm font-medium text-left w-full transition-colors hover:bg-white/30"
-              style={{ color: 'var(--sasi-primary)' }}
-            >
-              <SidebarIcon type="history" />
-              History
+              <IconSearch />
+              Analisador
             </button>
           </nav>
 
-          {/* Section nav — only when result loaded */}
+          {/* Token section links — only when result loaded */}
           {hasSections && (
             <div className="mt-1" style={{ borderTop: '1px solid var(--sasi-border)' }}>
               <p className="px-4 pt-3 pb-1 text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--sasi-muted)' }}>
@@ -120,7 +102,7 @@ export default function Home() {
                     className="flex items-center gap-2.5 px-4 h-9 text-sm font-medium hover:bg-white/30 transition-colors"
                     style={{ color: 'var(--sasi-primary)' }}
                   >
-                    <SidebarIcon type="dot" />
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'var(--sasi-primary)' }} />
                     {s.label}
                   </a>
                 ))}
@@ -131,90 +113,74 @@ export default function Home() {
 
         {/* Footer */}
         <div className="px-4 py-4" style={{ borderTop: '1px solid var(--sasi-border)' }}>
-          <p className="text-[10px]" style={{ color: 'var(--sasi-muted)' }}>v1.0 · Design System Extractor</p>
+          <p className="text-[10px]" style={{ color: 'var(--sasi-muted)' }}>v1.0 · Extrator de Design System</p>
           <p className="text-[10px] mt-0.5" style={{ color: 'var(--sasi-primary)' }}>by Rayssa Alegria</p>
         </div>
       </aside>
 
-      {/* ── Main ────────────────────────────────────── */}
+      {/* ── Main ──────────────────────────────────── */}
       <div className="flex-1 flex flex-col pr-2 pb-2 min-w-0">
 
-        {/* Header */}
-        <div
-          className="shrink-0 flex items-center justify-between px-6 h-[76px]"
-          style={{
-            background: 'var(--sasi-content)',
-            borderRadius: '8px 8px 0 0',
-            borderBottom: '1px solid var(--sasi-border)',
-          }}
-        >
-          <div>
-            <h1 className="text-2xl font-bold leading-none" style={{ color: 'var(--sasi-navy)' }}>
-              {result ? result.domain : 'Analyzer'}
-            </h1>
-            {result && (
-              <a
-                href={result.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] mt-1 block hover:underline truncate max-w-sm"
-                style={{ color: 'var(--sasi-gray)' }}
-              >
+        {/* Header — only when result is loaded */}
+        {result && (
+          <div
+            className="shrink-0 flex items-center justify-between px-6 h-[76px]"
+            style={{
+              background: 'var(--sasi-content)',
+              borderRadius: '8px 8px 0 0',
+              borderBottom: '1px solid var(--sasi-border)',
+            }}
+          >
+            <div className="min-w-0 mr-4">
+              <div className="flex items-center gap-2">
+                {result.favicon && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={result.favicon} alt="" className="w-5 h-5 rounded shrink-0"
+                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                )}
+                <h1 className="text-xl font-bold leading-none truncate" style={{ color: 'var(--sasi-navy)' }}>
+                  {result.domain}
+                </h1>
+              </div>
+              <a href={result.url} target="_blank" rel="noopener noreferrer"
+                className="text-[11px] mt-0.5 block hover:underline truncate max-w-sm"
+                style={{ color: 'var(--sasi-gray)' }}>
                 {result.url}
               </a>
-            )}
-          </div>
-
-          {/* URL Input form */}
-          <form onSubmit={handleAnalyze} className="flex items-center gap-2">
-            <div
-              className="flex items-center gap-2 h-8 px-3 rounded-lg text-sm"
-              style={{
-                background: 'var(--sasi-input-bg)',
-                border: '1px solid var(--sasi-input-border)',
-                minWidth: '280px',
-              }}
-            >
-              <svg className="w-4 h-4 shrink-0" style={{ color: 'var(--sasi-primary)' }} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="7" cy="7" r="4.5" /><path d="M10.5 10.5l2.5 2.5" />
-              </svg>
-              <input
-                type="text"
-                value={url}
-                onChange={e => setUrl(e.target.value)}
-                placeholder="stripe.com, vercel.com..."
-                className="flex-1 bg-transparent outline-none text-sm"
-                style={{ color: 'var(--sasi-navy)' }}
-                disabled={loading}
-              />
             </div>
-            <button
-              type="submit"
-              disabled={loading || !url.trim()}
-              className="h-8 px-4 rounded-lg text-sm font-medium text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
-              style={{ background: 'var(--sasi-primary)' }}
-            >
-              {loading ? (
-                <>
-                  <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  Analyzing
-                </>
-              ) : 'Analyze'}
-            </button>
-          </form>
-        </div>
 
-        {/* Content */}
+            {/* Compact search in header when result shown */}
+            <form onSubmit={handleAnalyze} className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center gap-2 h-8 px-3 rounded-lg"
+                style={{ background: 'var(--sasi-input-bg)', border: '1px solid var(--sasi-input-border)', minWidth: '240px' }}>
+                <IconSearch cls="w-3.5 h-3.5 shrink-0" />
+                <input type="text" value={url} onChange={e => setUrl(e.target.value)}
+                  placeholder="Nova URL..." className="flex-1 bg-transparent outline-none text-sm"
+                  style={{ color: 'var(--sasi-navy)' }} disabled={loading} />
+              </div>
+              <button type="submit" disabled={loading || !url.trim()}
+                className="h-8 px-4 rounded-lg text-sm font-medium text-white disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+                style={{ background: 'var(--sasi-primary)' }}>
+                {loading
+                  ? <><span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />Analisando</>
+                  : 'Analisar'}
+              </button>
+            </form>
+          </div>
+        )}
+
+        {/* Content area */}
         <div
           className="flex-1 overflow-y-auto min-h-0"
           style={{
             background: 'var(--sasi-content)',
-            borderRadius: '0 0 8px 8px',
+            borderRadius: result ? '0 0 8px 8px' : '8px',
           }}
         >
           {/* Error */}
           {error && (
-            <div className="mx-6 mt-4 p-3 rounded-lg text-sm" style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#dc2626' }}>
+            <div className="mx-6 mt-6 p-3 rounded-lg text-sm"
+              style={{ background: 'rgba(239,68,68,0.08)', border: '1px solid rgba(239,68,68,0.2)', color: '#dc2626' }}>
               {error}
             </div>
           )}
@@ -222,40 +188,58 @@ export default function Home() {
           {/* Result */}
           {result && <DesignSystemDisplay data={result} />}
 
-          {/* Empty state */}
-          {!result && !loading && !error && (
-            <div className="flex flex-col items-center justify-center h-full gap-4 py-24">
-              <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                style={{ background: 'var(--sasi-input-bg)', border: '1px solid var(--sasi-border)' }}
-              >
-                <svg className="w-7 h-7" style={{ color: 'var(--sasi-primary)' }} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="11" cy="11" r="7" /><path d="M16.5 16.5l4 4" />
-                </svg>
-              </div>
+          {/* ── Empty / centered search ── */}
+          {!result && !loading && (
+            <div className="flex flex-col items-center justify-center h-full gap-6 px-4">
               <div className="text-center">
-                <p className="text-sm font-medium" style={{ color: 'var(--sasi-navy)' }}>Enter a URL to extract its design system</p>
-                <p className="text-sm mt-1" style={{ color: 'var(--sasi-gray)' }}>fonts, colors, spacing, radii and shadows</p>
+                <h2 className="text-3xl font-bold mb-2" style={{ color: 'var(--sasi-navy)' }}>Systra</h2>
+                <p className="text-sm" style={{ color: 'var(--sasi-gray)' }}>
+                  Digite uma URL para extrair o design system completo
+                </p>
               </div>
+
+              <form onSubmit={handleAnalyze} className="w-full max-w-lg flex gap-2">
+                <div
+                  className="flex items-center gap-2 h-10 px-4 rounded-xl flex-1"
+                  style={{ background: 'var(--sasi-input-bg)', border: '1px solid var(--sasi-input-border)' }}
+                >
+                  <IconSearch cls="w-4 h-4 shrink-0" />
+                  <input
+                    type="text"
+                    value={url}
+                    onChange={e => setUrl(e.target.value)}
+                    placeholder="stripe.com, vercel.com, notion.so..."
+                    className="flex-1 bg-transparent outline-none text-sm"
+                    style={{ color: 'var(--sasi-navy)' }}
+                    autoFocus
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={!url.trim()}
+                  className="h-10 px-5 rounded-xl text-sm font-semibold text-white disabled:opacity-40 disabled:cursor-not-allowed"
+                  style={{ background: 'var(--sasi-primary)' }}
+                >
+                  Analisar
+                </button>
+              </form>
+
+              <p className="text-xs" style={{ color: 'var(--sasi-muted)' }}>
+                fontes · cores · espaçamentos · bordas · sombras · imagens
+              </p>
             </div>
           )}
 
-          {/* Loading state */}
+          {/* Loading */}
           {loading && (
-            <div className="flex flex-col items-center justify-center h-full py-24 gap-3">
-              <span className="w-8 h-8 border-2 border-[var(--sasi-input-border)] border-t-[var(--sasi-primary)] rounded-full animate-spin" />
-              <p className="text-sm" style={{ color: 'var(--sasi-gray)' }}>Analyzing {url}…</p>
+            <div className="flex flex-col items-center justify-center h-full gap-4">
+              <span className="w-8 h-8 border-2 rounded-full animate-spin"
+                style={{ borderColor: 'var(--sasi-border)', borderTopColor: 'var(--sasi-primary)' }} />
+              <p className="text-sm" style={{ color: 'var(--sasi-gray)' }}>Analisando {url}…</p>
             </div>
           )}
         </div>
       </div>
-
-      {/* History Panel */}
-      <HistoryPanel
-        open={historyOpen}
-        onClose={() => setHistoryOpen(false)}
-        onSelect={(r) => { setResult(r); setUrl(r.url); }}
-      />
     </div>
   );
 }
