@@ -63,11 +63,9 @@ export default function Home() {
       <aside className="w-[220px] shrink-0 flex flex-col justify-between" style={{ background: 'var(--sasi-sidebar)' }}>
         <div className="flex flex-col">
           {/* Brand */}
-          <div className="flex items-center gap-2 px-4 h-[76px] shrink-0">
-            <div className="w-6 h-6 rounded-lg flex items-center justify-center text-white text-[11px] font-bold shrink-0" style={{ background: 'var(--sasi-primary)' }}>
-              S
-            </div>
-            <span className="text-sm font-semibold truncate" style={{ color: 'var(--sasi-navy)' }}>Systra</span>
+          <div className="flex items-center px-3 h-[76px] shrink-0">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Systra" className="h-10 w-auto object-contain" />
           </div>
 
           {/* Nav */}

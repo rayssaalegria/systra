@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="p1" cx="50%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#fde8f0"/>
+      <stop offset="100%" stop-color="#e8779a"/>
+    </radialGradient>
+    <radialGradient id="p2" cx="50%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#fdd0e6"/>
+      <stop offset="100%" stop-color="#d4578a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 5 sakura petals (notched tip) rotated 72° each -->
+  <g transform="translate(50,50)">
+    <!-- Petal shape: rounded base, two-lobe tip -->
+    <g transform="rotate(0)">
+      <path d="M0,0 C-11,-4,-16,-16,-10,-28 C-6,-36,-1,-36,0,-32 C1,-36,6,-36,10,-28 C16,-16,11,-4,0,0Z"
+            fill="url(#p1)" stroke="#e8a0bf" stroke-width="0.5"/>
+    </g>
+    <g transform="rotate(72)">
+      <path d="M0,0 C-11,-4,-16,-16,-10,-28 C-6,-36,-1,-36,0,-32 C1,-36,6,-36,10,-28 C16,-16,11,-4,0,0Z"
+            fill="url(#p1)" stroke="#e8a0bf" stroke-width="0.5"/>
+    </g>
+    <g transform="rotate(144)">
+      <path d="M0,0 C-11,-4,-16,-16,-10,-28 C-6,-36,-1,-36,0,-32 C1,-36,6,-36,10,-28 C16,-16,11,-4,0,0Z"
+            fill="url(#p2)" stroke="#e8a0bf" stroke-width="0.5"/>
+    </g>
+    <g transform="rotate(216)">
+      <path d="M0,0 C-11,-4,-16,-16,-10,-28 C-6,-36,-1,-36,0,-32 C1,-36,6,-36,10,-28 C16,-16,11,-4,0,0Z"
+            fill="url(#p2)" stroke="#e8a0bf" stroke-width="0.5"/>
+    </g>
+    <g transform="rotate(288)">
+      <path d="M0,0 C-11,-4,-16,-16,-10,-28 C-6,-36,-1,-36,0,-32 C1,-36,6,-36,10,-28 C16,-16,11,-4,0,0Z"
+            fill="url(#p1)" stroke="#e8a0bf" stroke-width="0.5"/>
+    </g>
+
+    <!-- Center -->
+    <circle r="7" fill="#fde0ec"/>
+    <circle r="4.5" fill="#e8779a"/>
+
+    <!-- Stamens -->
+    <line x1="0" y1="-4.5" x2="0" y2="-9" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="0" cy="-9.5" r="1.2" fill="#f5c842"/>
+    <line x1="4.3" y1="-2.2" x2="7.8" y2="-5.7" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="8.3" cy="-6.2" r="1.2" fill="#f5c842"/>
+    <line x1="2.6" y1="3.7" x2="5" y2="7.5" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="5.3" cy="8" r="1.2" fill="#f5c842"/>
+    <line x1="-2.6" y1="3.7" x2="-5" y2="7.5" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="-5.3" cy="8" r="1.2" fill="#f5c842"/>
+    <line x1="-4.3" y1="-2.2" x2="-7.8" y2="-5.7" stroke="#f5c842" stroke-width="1" stroke-linecap="round"/>
+    <circle cx="-8.3" cy="-6.2" r="1.2" fill="#f5c842"/>
+  </g>
+</svg>
