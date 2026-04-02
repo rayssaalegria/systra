@@ -63,9 +63,9 @@ export default function Home() {
       <aside className="w-[220px] shrink-0 flex flex-col justify-between" style={{ background: 'var(--sasi-sidebar)' }}>
         <div className="flex flex-col">
           {/* Brand */}
-          <div className="flex items-center justify-center px-3 h-[76px] shrink-0">
+          <div className="flex items-center justify-center shrink-0" style={{ height: '120px', padding: '8px 6px' }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Systra" className="w-full object-contain" style={{ maxHeight: '68px' }} />
+            <img src="/logo.png" alt="Systra" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
 
           {/* Nav */}
@@ -122,7 +122,7 @@ export default function Home() {
         {/* Header — only when result is loaded */}
         {result && (
           <div
-            className="shrink-0 flex items-center justify-between px-6 h-[76px]"
+            className="shrink-0 flex items-center justify-between px-6 h-[120px]"
             style={{
               background: 'var(--sasi-content)',
               borderRadius: '8px 8px 0 0',
