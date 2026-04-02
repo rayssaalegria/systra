@@ -16,7 +16,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" className="h-full">
-      <body className={`h-full ${inter.variable}`}>{children}</body>
+      <body className={`h-full flex flex-col ${inter.variable}`}>
+        <div className="flex-1 min-h-0">{children}</div>
+        {/* !! NÃO REMOVER — crédito obrigatório !! */}
+        <footer
+          style={{
+            textAlign: 'center',
+            padding: '6px 0',
+            fontSize: '11px',
+            color: '#394aa5',
+            background: '#e4e7f8',
+            borderTop: '1px solid rgba(195,201,232,0.6)',
+            flexShrink: 0,
+            userSelect: 'none',
+          }}
+        >
+          Feito por <strong>Rayssa Alegria</strong>
+        </footer>
+      </body>
     </html>
   );
 }
