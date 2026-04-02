@@ -63,9 +63,9 @@ export default function Home() {
       <aside className="w-[220px] shrink-0 flex flex-col justify-between" style={{ background: 'var(--sasi-sidebar)' }}>
         <div className="flex flex-col">
           {/* Brand */}
-          <div className="flex items-center px-3 h-[76px] shrink-0">
+          <div className="flex items-center justify-center px-3 h-[76px] shrink-0">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo.png" alt="Systra" className="h-10 w-auto object-contain" />
+            <img src="/logo.png" alt="Systra" className="w-full object-contain" style={{ maxHeight: '68px' }} />
           </div>
 
           {/* Nav */}
